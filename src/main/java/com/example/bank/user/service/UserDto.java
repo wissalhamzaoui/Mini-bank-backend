@@ -1,26 +1,24 @@
-package model;
+package com.example.bank.user.service;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class UserDto {
 
-@Document 
-public class User {
-	@Id
-    private String id;
+	
+	private String UserId;
 	private String firstname;	
 	private String lastname;
-	private Date birthDate;
+	private Date Birthdate;
 	private String email;
 	private String password;
 	private String phone;
 	private String role;
-	public String getId() {
-		return id;
+	
+	public String getUserId() {
+		return UserId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		UserId = userId;
 	}
 	public String getFirstname() {
 		return firstname;
@@ -34,11 +32,11 @@ public class User {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	public Date getBirthDate() {
-		return birthDate;
+	public Date getBirthdate() {
+		return Birthdate;
 	}
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthdate(Date birthdate) {
+		Birthdate = birthdate;
 	}
 	public String getEmail() {
 		return email;
@@ -64,21 +62,7 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public User(String id, String firstname, String lastname, Date birthDate, String email, String password,
-			String phone, String role) {
-		super();
-		this.id = id;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.birthDate = birthDate;
-		this.email = email;
-		this.password = password;
-		this.phone = phone;
-		this.role = role;
-	}
-	public User() {
-		super();
-	}
+	
 	
 	
 

@@ -1,8 +1,8 @@
-package service;
+package com.example.bank.user.service;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
-import model.User;
+import com.example.bank.user.domain.User;
 
 @Mapper(componentModel = "spring")
 

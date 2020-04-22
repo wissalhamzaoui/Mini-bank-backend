@@ -15,8 +15,4 @@ spring:
       host: localhost
       port: 27017
       database: banque
-  jpa:
-    properties:
-        hibernate:
-            dialect: org.hibernate.dialect.MySQL5Dialect
       

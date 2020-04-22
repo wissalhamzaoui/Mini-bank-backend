@@ -1,4 +1,4 @@
-package model;
+package com.example.bank.account.domain;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

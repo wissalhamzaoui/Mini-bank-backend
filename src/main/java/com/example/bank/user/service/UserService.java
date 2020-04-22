@@ -1,22 +1,13 @@
-package service;
-import java.io.IOException;
+package com.example.bank.user.service;
 import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
 
-
-import org.springframework.web.multipart.MultipartFile;
-
-import com.mongodb.client.gridfs.model.GridFSFile;
-import model.User;
-import model.UserRepository;@Service
+import com.example.bank.user.domain.User;
+import com.example.bank.user.domain.UserRepository;@Service
 
 public class UserService {
 	@Autowired
@@ -25,9 +16,6 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 	
-	@Autowired
-	private GridFsTemplate gridFsTemplate;
-
 	public UserDto createUser(UserDto UserDto) {
 		User savedUser = userRepository.save(userMapper.mapToDomain(UserDto));
 		return userMapper.mapToDto(savedUser);
@@ -63,21 +51,10 @@ public class UserService {
 		userRepository.deleteAll();
 	}
 	
-	
-	
 	public void deleteUser(String id) {
 		userRepository.deleteById(id);
 	}
 	
-	public String uploadPicture(MultipartFile file) throws IOException {
-		return gridFsTemplate.store(file.getResource().getInputStream(), file.getResource().getFilename()).toString();
-	}
-	
-	public GridFSFile getPicture(String id) {
-		return gridFsTemplate.findOne(Query
-				.query((Criteria.where("_id").is(id))));
-	}
-
 	public Integer NumberOfUsers(){
 		return userRepository.findAll().size();
 	}

@@ -1,16 +1,8 @@
-package rest;
+package com.example.bank.user.rest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URLConnection;
-import java.net.URLDecoder;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mongodb.client.gridfs.model.GridFSFile;
-
-import service.UserDto;
-import service.UserService;
+import com.example.bank.user.service.UserDto;
+import com.example.bank.user.service.UserService;
 
 @RestController
 @CrossOrigin(origins = { "*" })
@@ -74,49 +64,4 @@ public class UserController {
 	public void deleteUser(@PathVariable String id) {
 		userService.deleteUser(id);
 	}
-	
-	@GetMapping(value = "/getPicture/{id}")
-	public void getPictureURL(HttpServletResponse response, @PathVariable String id) throws IOException {
-
-      
-	  GridFSFile fsFile = this.userService.getPicture(id);
-      
-      // display name from file.
-
-      String fileName = fsFile.getFilename();
-  
-      //set Content Type
-      response.setContentType(URLConnection.guessContentTypeFromName(fileName));
-      
-	  // the length
-      response.setContentLengthLong(fsFile.getLength());
-
-      fileName = URLDecoder.decode(fileName, "ISO8859_1");
-
-      response.setHeader("Content-disposition", "inline; filename=" + fileName);
-
-      // The inputstream from mongo
-
-      GridFsResource resource = gridFsTemplate.getResource(fsFile.getFilename());
-      InputStream inputStream = resource.getInputStream();
-
-      // response out put stream will be used to write the file content.
-
-      OutputStream out = response.getOutputStream();
-
-      byte[] buf = new byte[1024];
-
-      int count = 0;
-
-      while ((count = inputStream.read(buf)) >= 0) {
-
-             out.write(buf, 0, count);
-
-      }
-
-      out.close();
-
-      inputStream.close();
-
-}	
 }
