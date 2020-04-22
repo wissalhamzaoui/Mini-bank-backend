@@ -1,0 +1,22 @@
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+        security: INFO
+   
+server:
+  port: 8083
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: banque
+  jpa:
+    properties:
+        hibernate:
+            dialect: org.hibernate.dialect.MySQL5Dialect
+      
